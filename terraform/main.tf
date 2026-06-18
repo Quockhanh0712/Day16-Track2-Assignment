@@ -172,13 +172,13 @@ resource "aws_instance" "bastion" {
   tags = { Name = "AI-Bastion-Host" }
 }
 
-# 5. GPU Instance
+# 5. GPU Instance (Updated for CPU Node with Amazon Linux 2023)
 data "aws_ami" "deep_learning" {
   most_recent = true
   owners      = ["amazon"]
   filter {
     name   = "name"
-    values = ["Deep Learning Base OSS Nvidia Driver GPU AMI (Ubuntu 22.04)*"]
+    values = ["al2023-ami-*-x86_64"]
   }
 }
 
@@ -206,7 +206,7 @@ resource "aws_iam_instance_profile" "ai_profile" {
 
 resource "aws_instance" "gpu_node" {
   ami                    = data.aws_ami.deep_learning.id
-  instance_type          = "g4dn.xlarge" 
+  instance_type          = "m7i-flex.large" 
   subnet_id              = aws_subnet.private[0].id
   vpc_security_group_ids = [aws_security_group.gpu_sg.id]
   key_name               = aws_key_pair.lab_key.key_name
