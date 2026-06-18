@@ -1,0 +1,649 @@
+PS A:\AIK20_aithucchien\Track2\Day16-Track2-Assignment\terraform> terraform apply
+random_id.id: Refreshing state... [id=1z683w]
+data.aws_availability_zones.available: Reading...
+aws_key_pair.lab_key: Refreshing state... [id=ai-lab-key-d73ebcdf]
+data.aws_ami.ubuntu: Reading...
+data.aws_ami.deep_learning: Reading...
+aws_eip.nat_eip: Refreshing state... [id=eipalloc-0b607b1c017067a1d]
+aws_iam_role.ai_role: Refreshing state... [id=ai-inference-role-d73ebcdf]
+aws_vpc.ai_vpc: Refreshing state... [id=vpc-049db52e9e8a2fa40]
+data.aws_availability_zones.available: Read complete after 1s [id=us-east-1]
+aws_iam_instance_profile.ai_profile: Refreshing state... [id=ai-inference-profile-d73ebcdf]
+data.aws_ami.ubuntu: Read complete after 2s [id=ami-0d7405d05f836d0d4]
+data.aws_ami.deep_learning: Read complete after 2s [id=ami-03d84abcde942cf8c]
+aws_internet_gateway.igw: Refreshing state... [id=igw-046022bc3c3847b44]
+aws_subnet.private[1]: Refreshing state... [id=subnet-016bf1e7aca308a04]
+aws_subnet.private[0]: Refreshing state... [id=subnet-066d2d9857deb5e50]
+aws_security_group.alb_sg: Refreshing state... [id=sg-065951be2f891d92f]
+aws_subnet.public[1]: Refreshing state... [id=subnet-0ef99b940be5404d5]
+aws_security_group.bastion_sg: Refreshing state... [id=sg-06005d603abe9df2c]
+aws_subnet.public[0]: Refreshing state... [id=subnet-054d24d3af569d75c]
+aws_lb_target_group.ai_tg: Refreshing state... [id=arn:aws:elasticloadbalancing:us-east-1:968234051076:targetgroup/ai-inference-tg-d73ebcdf/50eeb44a0dd7e4d7]
+aws_route_table.public_rt: Refreshing state... [id=rtb-0d7c22d72d09d21e0]
+aws_security_group.gpu_sg: Refreshing state... [id=sg-02db231270381f653]
+aws_nat_gateway.nat: Refreshing state... [id=nat-0dfb13f8709440d06]
+aws_lb.ai_alb: Refreshing state... [id=arn:aws:elasticloadbalancing:us-east-1:968234051076:loadbalancer/app/ai-inference-alb-d73ebcdf/64365160f8f2efc1]
+aws_instance.bastion: Refreshing state... [id=i-07b58158eb8b3ed29]
+aws_route_table_association.public_assoc[1]: Refreshing state... [id=rtbassoc-0df1998cfd39be2bd]
+aws_route_table_association.public_assoc[0]: Refreshing state... [id=rtbassoc-0cbfe02d6e6a58610]
+aws_route_table.private_rt: Refreshing state... [id=rtb-0007ed9c7fd4328f2]
+aws_route_table_association.private_assoc[1]: Refreshing state... [id=rtbassoc-06ff9cab056f7d382]
+aws_route_table_association.private_assoc[0]: Refreshing state... [id=rtbassoc-0fb52b082be5e6c18]
+aws_lb_listener.ai_listener: Refreshing state... [id=arn:aws:elasticloadbalancing:us-east-1:968234051076:listener/app/ai-inference-alb-d73ebcdf/64365160f8f2efc1/9f9b7c176c888e39]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are  
+indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # aws_instance.gpu_node will be created
+  + resource "aws_instance" "gpu_node" {
+      + ami                                  = "ami-03d84abcde942cf8c"
+      + arn                                  = (known after apply)
+      + associate_public_ip_address          = (known after apply)
+      + availability_zone                    = (known after apply)
+      + cpu_core_count                       = (known after apply)
+      + cpu_threads_per_core                 = (known after apply)
+      + disable_api_stop                     = (known after apply)
+      + disable_api_termination              = (known after apply)
+      + ebs_optimized                        = (known after apply)
+      + enable_primary_ipv6                  = (known after apply)
+      + get_password_data                    = false
+      + host_id                              = (known after apply)
+      + host_resource_group_arn              = (known after apply)
+      + iam_instance_profile                 = "ai-inference-profile-d73ebcdf"
+      + id                                   = (known after apply)
+      + instance_initiated_shutdown_behavior = (known after apply)
+      + instance_lifecycle                   = (known after apply)
+      + instance_state                       = (known after apply)
+      + instance_type                        = "m7i-flex.large"
+      + ipv6_address_count                   = (known after apply)
+      + ipv6_addresses                       = (known after apply)
+      + key_name                             = "ai-lab-key-d73ebcdf"
+      + monitoring                           = (known after apply)
+      + outpost_arn                          = (known after apply)
+      + password_data                        = (known after apply)
+      + placement_group                      = (known after apply)
+      + placement_partition_number           = (known after apply)
+      + primary_network_interface_id         = (known after apply)
+      + private_dns                          = (known after apply)
+      + private_ip                           = (known after apply)
+      + public_dns                           = (known after apply)
+      + public_ip                            = (known after apply)
+      + secondary_private_ips                = (known after apply)
+      + security_groups                      = (known after apply)
+      + source_dest_check                    = true
+      + spot_instance_request_id             = (known after apply)
+      + subnet_id                            = "subnet-066d2d9857deb5e50"
+      + tags                                 = {
+          + "Name" = "AI-Inference-Node"
+        }
+      + tags_all                             = {
+          + "Name" = "AI-Inference-Node"
+        }
+      + tenancy                              = (known after apply)
+      + user_data                            = (sensitive value)
+      + user_data_base64                     = (known after apply)
+      + user_data_replace_on_change          = false
+      + vpc_security_group_ids               = [
+          + "sg-02db231270381f653",
+        ]
+
+      + capacity_reservation_specification (known after apply)
+
+      + cpu_options (known after apply)
+
+      + ebs_block_device (known after apply)
+
+      + enclave_options (known after apply)
+
+      + ephemeral_block_device (known after apply)
+
+      + instance_market_options (known after apply)
+
+      + maintenance_options (known after apply)
+
+      + metadata_options (known after apply)
+
+      + network_interface (known after apply)
+
+      + private_dns_name_options (known after apply)
+
+      + root_block_device {
+          + delete_on_termination = true
+          + device_name           = (known after apply)
+          + encrypted             = (known after apply)
+          + iops                  = (known after apply)
+          + kms_key_id            = (known after apply)
+          + tags_all              = (known after apply)
+          + throughput            = (known after apply)
+          + volume_id             = (known after apply)
+          + volume_size           = 150
+          + volume_type           = "gp3"
+        }
+    }
+
+  # aws_lb_target_group_attachment.ai_tg_attach will be created
+  + resource "aws_lb_target_group_attachment" "ai_tg_attach" {
+      + id               = (known after apply)
+      + port             = 8000
+      + target_group_arn = "arn:aws:elasticloadbalancing:us-east-1:968234051076:targetgroup/ai-inference-tg-d73ebcdf/50eeb44a0dd7e4d7"
+      + target_id        = (known after apply)
+    }
+
+Plan: 2 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + gpu_private_ip    = (known after apply)
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value:
+
+Apply cancelled.
+PS A:\AIK20_aithucchien\Track2\Day16-Track2-Assignment\terraform> terraform apply
+random_id.id: Refreshing state... [id=1z683w]
+aws_key_pair.lab_key: Refreshing state... [id=ai-lab-key-d73ebcdf]
+data.aws_ami.ubuntu: Reading...
+aws_iam_role.ai_role: Refreshing state... [id=ai-inference-role-d73ebcdf]
+data.aws_availability_zones.available: Reading...
+data.aws_ami.deep_learning: Reading...
+aws_eip.nat_eip: Refreshing state... [id=eipalloc-0b607b1c017067a1d]
+aws_vpc.ai_vpc: Refreshing state... [id=vpc-049db52e9e8a2fa40]
+data.aws_availability_zones.available: Read complete after 1s [id=us-east-1]
+data.aws_ami.ubuntu: Read complete after 1s [id=ami-0d7405d05f836d0d4]
+aws_iam_instance_profile.ai_profile: Refreshing state... [id=ai-inference-profile-d73ebcdf]
+data.aws_ami.deep_learning: Read complete after 2s [id=ami-03d84abcde942cf8c]
+aws_internet_gateway.igw: Refreshing state... [id=igw-046022bc3c3847b44]
+aws_security_group.alb_sg: Refreshing state... [id=sg-065951be2f891d92f]
+aws_subnet.private[1]: Refreshing state... [id=subnet-016bf1e7aca308a04]
+aws_subnet.private[0]: Refreshing state... [id=subnet-066d2d9857deb5e50]
+aws_subnet.public[0]: Refreshing state... [id=subnet-054d24d3af569d75c]
+aws_security_group.bastion_sg: Refreshing state... [id=sg-06005d603abe9df2c]
+aws_subnet.public[1]: Refreshing state... [id=subnet-0ef99b940be5404d5]
+aws_lb_target_group.ai_tg: Refreshing state... [id=arn:aws:elasticloadbalancing:us-east-1:968234051076:targetgroup/ai-inference-tg-d73ebcdf/50eeb44a0dd7e4d7]
+aws_route_table.public_rt: Refreshing state... [id=rtb-0d7c22d72d09d21e0]
+aws_security_group.gpu_sg: Refreshing state... [id=sg-02db231270381f653]
+aws_route_table_association.public_assoc[0]: Refreshing state... [id=rtbassoc-0cbfe02d6e6a58610]
+aws_route_table_association.public_assoc[1]: Refreshing state... [id=rtbassoc-0df1998cfd39be2bd]      
+aws_nat_gateway.nat: Refreshing state... [id=nat-0dfb13f8709440d06]
+aws_lb.ai_alb: Refreshing state... [id=arn:aws:elasticloadbalancing:us-east-1:968234051076:loadbalancer/app/ai-inference-alb-d73ebcdf/64365160f8f2efc1]
+aws_instance.bastion: Refreshing state... [id=i-07b58158eb8b3ed29]
+aws_route_table.private_rt: Refreshing state... [id=rtb-0007ed9c7fd4328f2]
+aws_route_table_association.private_assoc[1]: Refreshing state... [id=rtbassoc-06ff9cab056f7d382]
+aws_route_table_association.private_assoc[0]: Refreshing state... [id=rtbassoc-0fb52b082be5e6c18]
+aws_lb_listener.ai_listener: Refreshing state... [id=arn:aws:elasticloadbalancing:us-east-1:968234051076:listener/app/ai-inference-alb-d73ebcdf/64365160f8f2efc1/9f9b7c176c888e39]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are  
+indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # aws_instance.gpu_node will be created
+  + resource "aws_instance" "gpu_node" {
+      + ami                                  = "ami-03d84abcde942cf8c"
+      + arn                                  = (known after apply)
+      + associate_public_ip_address          = (known after apply)
+      + availability_zone                    = (known after apply)
+      + cpu_core_count                       = (known after apply)
+      + cpu_threads_per_core                 = (known after apply)
+      + disable_api_stop                     = (known after apply)
+      + disable_api_termination              = (known after apply)
+      + ebs_optimized                        = (known after apply)
+      + enable_primary_ipv6                  = (known after apply)
+      + get_password_data                    = false
+      + host_id                              = (known after apply)
+      + host_resource_group_arn              = (known after apply)
+      + iam_instance_profile                 = "ai-inference-profile-d73ebcdf"
+      + id                                   = (known after apply)
+      + instance_initiated_shutdown_behavior = (known after apply)
+      + instance_lifecycle                   = (known after apply)
+      + instance_state                       = (known after apply)
+      + instance_type                        = "m7i-flex.large"
+      + ipv6_address_count                   = (known after apply)
+      + ipv6_addresses                       = (known after apply)
+      + key_name                             = "ai-lab-key-d73ebcdf"
+      + monitoring                           = (known after apply)
+      + outpost_arn                          = (known after apply)
+      + password_data                        = (known after apply)
+      + placement_group                      = (known after apply)
+      + placement_partition_number           = (known after apply)
+      + primary_network_interface_id         = (known after apply)
+      + private_dns                          = (known after apply)
+      + private_ip                           = (known after apply)
+      + public_dns                           = (known after apply)
+      + public_ip                            = (known after apply)
+      + secondary_private_ips                = (known after apply)
+      + security_groups                      = (known after apply)
+      + source_dest_check                    = true
+      + spot_instance_request_id             = (known after apply)
+      + subnet_id                            = "subnet-066d2d9857deb5e50"
+      + tags                                 = {
+          + "Name" = "AI-Inference-Node"
+        }
+      + tags_all                             = {
+          + "Name" = "AI-Inference-Node"
+        }
+      + tenancy                              = (known after apply)
+      + user_data                            = (sensitive value)
+      + user_data_base64                     = (known after apply)
+      + user_data_replace_on_change          = false
+      + vpc_security_group_ids               = [
+          + "sg-02db231270381f653",
+        ]
+
+      + capacity_reservation_specification (known after apply)
+
+      + cpu_options (known after apply)
+
+      + ebs_block_device (known after apply)
+
+      + enclave_options (known after apply)
+
+      + ephemeral_block_device (known after apply)
+
+      + instance_market_options (known after apply)
+
+      + maintenance_options (known after apply)
+
+      + metadata_options (known after apply)
+
+      + network_interface (known after apply)
+
+      + private_dns_name_options (known after apply)
+
+      + root_block_device {
+          + delete_on_termination = true
+          + device_name           = (known after apply)
+          + encrypted             = (known after apply)
+          + iops                  = (known after apply)
+          + kms_key_id            = (known after apply)
+          + tags_all              = (known after apply)
+          + throughput            = (known after apply)
+          + volume_id             = (known after apply)
+          + volume_size           = 150
+          + volume_type           = "gp3"
+        }
+    }
+
+  # aws_lb_target_group_attachment.ai_tg_attach will be created
+  + resource "aws_lb_target_group_attachment" "ai_tg_attach" {
+      + id               = (known after apply)
+      + port             = 8000
+      + target_group_arn = "arn:aws:elasticloadbalancing:us-east-1:968234051076:targetgroup/ai-inference-tg-d73ebcdf/50eeb44a0dd7e4d7"
+      + target_id        = (known after apply)
+    }
+
+Plan: 2 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + gpu_private_ip    = (known after apply)
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+aws_instance.gpu_node: Creating...
+aws_instance.gpu_node: Still creating... [10s elapsed]
+aws_instance.gpu_node: Creation complete after 16s [id=i-079df8eb3ce80728c]
+aws_lb_target_group_attachment.ai_tg_attach: Creating...
+aws_lb_target_group_attachment.ai_tg_attach: Creation complete after 2s [id=arn:aws:elasticloadbalancing:us-east-1:968234051076:targetgroup/ai-inference-tg-d73ebcdf/50eeb44a0dd7e4d7-20260618042952624900000002]
+
+Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+alb_dns_name = "ai-inference-alb-d73ebcdf-1523998215.us-east-1.elb.amazonaws.com"
+bastion_public_ip = "13.220.32.121"
+endpoint_url = "http://ai-inference-alb-d73ebcdf-1523998215.us-east-1.elb.amazonaws.com/v1/completions"
+gpu_private_ip = "10.0.10.78"
+PS A:\AIK20_aithucchien\Track2\Day16-Track2-Assignment\terraform> # 1. Cấu hình bảo mật cho file lab-key trên Windows (Tránh lỗi WARNING: UNPROTECTED PRIVATE KEY)
+PS A:\AIK20_aithucchien\Track2\Day16-Track2-Assignment\terraform> icacls .\lab-key /inheritance:r
+processed file: .\lab-key
+Successfully processed 1 files; Failed processing 0 files
+PS A:\AIK20_aithucchien\Track2\Day16-Track2-Assignment\terraform> icacls .\lab-key /grant:r "$($env:USERNAME):R"
+processed file: .\lab-key
+Successfully processed 1 files; Failed processing 0 files
+PS A:\AIK20_aithucchien\Track2\Day16-Track2-Assignment\terraform> 
+PS A:\AIK20_aithucchien\Track2\Day16-Track2-Assignment\terraform> # 2. Upload file lab-key lên Bastion Host để dùng kết nối tiếp từ Bastion vào CPU Node
+PS A:\AIK20_aithucchien\Track2\Day16-Track2-Assignment\terraform> scp -i .\lab-key .\lab-key ubuntu@13.220.32.121:/home/ubuntu/
+The authenticity of host '13.220.32.121 (13.220.32.121)' can't be established.
+ED25519 key fingerprint is SHA256:LYV1luCRHPOuYniePgGIzqG+aWOp/gCh8i9wDtaYDJ8.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])?
+Please type 'yes', 'no' or the fingerprint: 
+Warning: Permanently added '13.220.32.121' (ED25519) to the list of known hosts.
+lab-key                                                             100% 1843     2.1KB/s   00:00    
+PS A:\AIK20_aithucchien\Track2\Day16-Track2-Assignment\terraform> 
+PS A:\AIK20_aithucchien\Track2\Day16-Track2-Assignment\terraform> # 3. Upload file benchmark.py lên Bastion Host
+PS A:\AIK20_aithucchien\Track2\Day16-Track2-Assignment\terraform> scp -i .\lab-key ..\benchmark.py ubuntu@13.220.32.121:/home/ubuntu/
+benchmark.py                                                        100% 4083    15.1KB/s   00:00    
+PS A:\AIK20_aithucchien\Track2\Day16-Track2-Assignment\terraform> ssh -i .\lab-key ubuntu@13.220.32.121
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 6.8.0-1057-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Thu Jun 18 04:32:25 UTC 2026
+
+  System load:  0.0               Processes:             106
+  Usage of /:   23.3% of 7.57GB   Users logged in:       0
+  Memory usage: 24%               IPv4 address for ens5: 10.0.0.243
+  Swap usage:   0%
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+New release '24.04.4 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@ip-10-0-0-243:~$ 
+ubuntu@ip-10-0-0-243:~$ ssh -i .\lab-key ubuntu@13.220.32.121
+Warning: Identity file .lab-key not accessible: No such file or directory.
+The authenticity of host '13.220.32.121 (13.220.32.121)' can't be established.
+ED25519 key fingerprint is SHA256:LYV1luCRHPOuYniePgGIzqG+aWOp/gCh8i9wDtaYDJ8.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes 
+Warning: Permanently added '13.220.32.121' (ED25519) to the list of known hosts.
+ubuntu@13.220.32.121: Permission denied (publickey).
+ubuntu@ip-10-0-0-243:~$ chmod 400 lab-key
+ubuntu@ip-10-0-0-243:~$ scp -i lab-key benchmark.py ec2-user@10.0.10.78:/home/ec2-user/
+The authenticity of host '10.0.10.78 (10.0.10.78)' can't be established.
+ED25519 key fingerprint is SHA256:em2YNCU3SwXn666xfitqX8NBKeCBWxMXnI0QEaS8M7Q.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes 
+Warning: Permanently added '10.0.10.78' (ED25519) to the list of known hosts.
+benchmark.py                                                        100% 4083     1.3MB/s   00:00    
+ubuntu@ip-10-0-0-243:~$ ssh -i lab-key ec2-user@10.0.10.78
+Updates Information Summary: available
+    3 Security notice(s)
+        3 Important Security notice(s)
+
+   ,     #_
+   ~\_  ####_
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   Amazon Linux 2023 (ECS Optimized)
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+
+For documentation, visit http://aws.amazon.com/documentation/ecs
+[ec2-user@ip-10-0-10-78 ~]$ sudo dnf update -y
+sudo dnf install -y python3 python3-pip
+Amazon Linux 2023 repository                                           45 MB/s |  67 MB     00:01    
+Amazon Linux 2023 Kernel Livepatch repository                         276 kB/s |  48 kB     00:00    
+Dependencies resolved.
+======================================================================================================
+ Package              Architecture     Version                            Repository             Size 
+======================================================================================================
+Upgrading:
+ containerd           x86_64           2.2.4-1.amzn2023.0.1               amazonlinux            24 M 
+ docker               x86_64           25.0.16-1.amzn2023.0.2             amazonlinux            46 M 
+ runc                 x86_64           1.3.5-1.amzn2023.0.2               amazonlinux           3.9 M 
+
+Transaction Summary
+======================================================================================================
+Upgrade  3 Packages
+
+Total download size: 75 M
+Downloading Packages:
+(1/3): runc-1.3.5-1.amzn2023.0.2.x86_64.rpm                            22 MB/s | 3.9 MB     00:00    
+(2/3): containerd-2.2.4-1.amzn2023.0.1.x86_64.rpm                      28 MB/s |  24 MB     00:00     
+(3/3): docker-25.0.16-1.amzn2023.0.2.x86_64.rpm                        40 MB/s |  46 MB     00:01     
+------------------------------------------------------------------------------------------------------
+Total                                                                  63 MB/s |  75 MB     00:01     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                              1/1 
+  Upgrading        : runc-1.3.5-1.amzn2023.0.2.x86_64                                             1/6 
+  Upgrading        : containerd-2.2.4-1.amzn2023.0.1.x86_64                                       2/6 
+  Running scriptlet: containerd-2.2.4-1.amzn2023.0.1.x86_64                                       2/6 
+  Running scriptlet: docker-25.0.16-1.amzn2023.0.2.x86_64                                         3/6 
+  Upgrading        : docker-25.0.16-1.amzn2023.0.2.x86_64                                         3/6 
+  Running scriptlet: docker-25.0.16-1.amzn2023.0.2.x86_64                                         3/6 
+  Running scriptlet: docker-25.0.14-1.amzn2023.0.6.x86_64                                         4/6 
+  Cleanup          : docker-25.0.14-1.amzn2023.0.6.x86_64                                         4/6 
+  Running scriptlet: docker-25.0.14-1.amzn2023.0.6.x86_64                                         4/6 
+  Running scriptlet: containerd-2.2.3-1.amzn2023.0.2.x86_64                                       5/6 
+  Cleanup          : containerd-2.2.3-1.amzn2023.0.2.x86_64                                       5/6 
+  Running scriptlet: containerd-2.2.3-1.amzn2023.0.2.x86_64                                       5/6 
+  Cleanup          : runc-1.3.4-5.amzn2023.0.2.x86_64                                             6/6 
+  Running scriptlet: runc-1.3.4-5.amzn2023.0.2.x86_64                                             6/6 
+  Verifying        : containerd-2.2.4-1.amzn2023.0.1.x86_64                                       1/6 
+  Verifying        : containerd-2.2.3-1.amzn2023.0.2.x86_64                                       2/6 
+  Verifying        : docker-25.0.16-1.amzn2023.0.2.x86_64                                         3/6 
+  Verifying        : docker-25.0.14-1.amzn2023.0.6.x86_64                                         4/6 
+  Verifying        : runc-1.3.5-1.amzn2023.0.2.x86_64                                             5/6 
+  Verifying        : runc-1.3.4-5.amzn2023.0.2.x86_64                                             6/6 
+
+Upgraded:
+  containerd-2.2.4-1.amzn2023.0.1.x86_64             docker-25.0.16-1.amzn2023.0.2.x86_64
+  runc-1.3.5-1.amzn2023.0.2.x86_64
+
+Complete!
+Last metadata expiration check: 0:00:25 ago on Thu Jun 18 04:34:11 2026.
+Package python3-3.9.25-1.amzn2023.0.6.x86_64 is already installed.
+Dependencies resolved.
+======================================================================================================
+ Package                   Architecture    Version                         Repository            Size 
+======================================================================================================
+Installing:
+ python3-pip               noarch          21.3.1-2.amzn2023.0.19          amazonlinux          1.8 M 
+Installing weak dependencies:
+ libxcrypt-compat          x86_64          4.4.33-7.amzn2023               amazonlinux           92 k 
+
+Transaction Summary
+======================================================================================================
+Install  2 Packages
+
+Total download size: 1.9 M
+Installed size: 11 M
+Downloading Packages:
+(1/2): libxcrypt-compat-4.4.33-7.amzn2023.x86_64.rpm                  2.1 MB/s |  92 kB     00:00     
+(2/2): python3-pip-21.3.1-2.amzn2023.0.19.noarch.rpm                   33 MB/s | 1.8 MB     00:00     
+------------------------------------------------------------------------------------------------------
+Total                                                                  19 MB/s | 1.9 MB     00:00     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                              1/1 
+  Installing       : libxcrypt-compat-4.4.33-7.amzn2023.x86_64                                    1/2 
+  Installing       : python3-pip-21.3.1-2.amzn2023.0.19.noarch                                    2/2 
+  Running scriptlet: python3-pip-21.3.1-2.amzn2023.0.19.noarch                                    2/2 
+  Verifying        : libxcrypt-compat-4.4.33-7.amzn2023.x86_64                                    1/2 
+  Verifying        : python3-pip-21.3.1-2.amzn2023.0.19.noarch                                    2/2 
+
+Installed:
+  libxcrypt-compat-4.4.33-7.amzn2023.x86_64         python3-pip-21.3.1-2.amzn2023.0.19.noarch
+
+Complete!
+[ec2-user@ip-10-0-10-78 ~]$ pip3 install --upgrade pip
+pip3 install lightgbm scikit-learn pandas numpy kaggle
+Defaulting to user installation because normal site-packages is not writeable
+Requirement already satisfied: pip in /usr/lib/python3.9/site-packages (21.3.1)
+Collecting pip
+  Downloading pip-26.0.1-py3-none-any.whl (1.8 MB)
+     |████████████████████████████████| 1.8 MB 26.4 MB/s
+Installing collected packages: pip
+Successfully installed pip-26.0.1
+Defaulting to user installation because normal site-packages is not writeable
+Collecting lightgbm
+  Downloading lightgbm-4.6.0-py3-none-manylinux_2_28_x86_64.whl.metadata (17 kB)
+Collecting scikit-learn
+  Downloading scikit_learn-1.6.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (18 kB)
+Collecting pandas
+  Downloading pandas-2.3.3-cp39-cp39-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (91 kB)
+Collecting numpy
+  Downloading numpy-2.0.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (60 kB)
+Collecting kaggle
+  Downloading kaggle-1.7.4.5-py3-none-any.whl.metadata (16 kB)
+Collecting scipy (from lightgbm)
+  Downloading scipy-1.13.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (60 kB)
+Collecting joblib>=1.2.0 (from scikit-learn)
+  Downloading joblib-1.5.3-py3-none-any.whl.metadata (5.5 kB)
+Collecting threadpoolctl>=3.1.0 (from scikit-learn)
+  Downloading threadpoolctl-3.6.0-py3-none-any.whl.metadata (13 kB)
+Collecting python-dateutil>=2.8.2 (from pandas)
+  Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+Requirement already satisfied: pytz>=2020.1 in /usr/lib/python3.9/site-packages (from pandas) (2022.7.1)
+Collecting tzdata>=2022.7 (from pandas)
+  Downloading tzdata-2026.2-py2.py3-none-any.whl.metadata (1.4 kB)
+Collecting bleach (from kaggle)
+  Downloading bleach-6.2.0-py3-none-any.whl.metadata (30 kB)
+Collecting certifi>=14.05.14 (from kaggle)
+  Downloading certifi-2026.6.17-py3-none-any.whl.metadata (2.5 kB)
+Collecting charset-normalizer (from kaggle)
+  Downloading charset_normalizer-3.4.7-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (40 kB)
+Requirement already satisfied: idna in /usr/lib/python3.9/site-packages (from kaggle) (2.10)
+Collecting protobuf (from kaggle)
+  Downloading protobuf-6.33.6-cp39-abi3-manylinux2014_x86_64.whl.metadata (593 bytes)
+Collecting python-slugify (from kaggle)
+  Downloading python_slugify-8.0.4-py2.py3-none-any.whl.metadata (8.5 kB)
+Requirement already satisfied: requests in /usr/lib/python3.9/site-packages (from kaggle) (2.25.1)
+Requirement already satisfied: setuptools>=21.0.0 in /usr/lib/python3.9/site-packages (from kaggle) (59.6.0)
+Requirement already satisfied: six>=1.10 in /usr/lib/python3.9/site-packages (from kaggle) (1.15.0)   
+Collecting text-unidecode (from kaggle)
+  Downloading text_unidecode-1.3-py2.py3-none-any.whl.metadata (2.4 kB)
+Collecting tqdm (from kaggle)
+  Downloading tqdm-4.68.3-py3-none-any.whl.metadata (57 kB)
+Requirement already satisfied: urllib3>=1.15.1 in /usr/lib/python3.9/site-packages (from kaggle) (1.25.10)
+Collecting webencodings (from kaggle)
+  Downloading webencodings-0.5.1-py2.py3-none-any.whl.metadata (2.1 kB)
+Requirement already satisfied: chardet<5,>=3.0.2 in /usr/lib/python3.9/site-packages (from requests->kaggle) (4.0.0)
+Downloading lightgbm-4.6.0-py3-none-manylinux_2_28_x86_64.whl (3.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.6/3.6 MB 70.4 MB/s  0:00:00
+Downloading scikit_learn-1.6.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (13.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.5/13.5 MB 256.7 MB/s  0:00:00
+Downloading pandas-2.3.3-cp39-cp39-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (12.8 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.8/12.8 MB 255.4 MB/s  0:00:00
+Downloading numpy-2.0.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (19.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 19.5/19.5 MB 239.5 MB/s  0:00:00
+Downloading kaggle-1.7.4.5-py3-none-any.whl (181 kB)
+Downloading certifi-2026.6.17-py3-none-any.whl (133 kB)
+Downloading joblib-1.5.3-py3-none-any.whl (309 kB)
+Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+Downloading scipy-1.13.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (38.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 38.6/38.6 MB 264.3 MB/s  0:00:00
+Downloading threadpoolctl-3.6.0-py3-none-any.whl (18 kB)
+Downloading tzdata-2026.2-py2.py3-none-any.whl (349 kB)
+Downloading bleach-6.2.0-py3-none-any.whl (163 kB)
+Downloading charset_normalizer-3.4.7-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (208 kB)
+Downloading protobuf-6.33.6-cp39-abi3-manylinux2014_x86_64.whl (323 kB)
+Downloading python_slugify-8.0.4-py2.py3-none-any.whl (10 kB)
+Downloading text_unidecode-1.3-py2.py3-none-any.whl (78 kB)
+Downloading tqdm-4.68.3-py3-none-any.whl (78 kB)
+Downloading webencodings-0.5.1-py2.py3-none-any.whl (11 kB)
+Installing collected packages: webencodings, text-unidecode, tzdata, tqdm, threadpoolctl, python-slugify, python-dateutil, protobuf, numpy, joblib, charset-normalizer, certifi, bleach, scipy, pandas, kaggle, scikit-learn, lightgbm
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+awscli 2.33.15 requires python-dateutil<=2.9.0,>=2.1, but you have python-dateutil 2.9.0.post0 which is incompatible.
+Successfully installed bleach-6.2.0 certifi-2026.6.17 charset-normalizer-3.4.7 joblib-1.5.3 kaggle-1.7.4.5 lightgbm-4.6.0 numpy-2.0.2 pandas-2.3.3 protobuf-6.33.6 python-dateutil-2.9.0.post0 python-slugify-8.0.4 scikit-learn-1.6.1 scipy-1.13.1 text-unidecode-1.3 threadpoolctl-3.6.0 tqdm-4.68.3 tzdata-2026.2 webencodings-0.5.1
+[ec2-user@ip-10-0-10-78 ~]$ pip3 install --upgrade pip
+pip3 install lightgbm scikit-learn pandas numpy kaggle
+Defaulting to user installation because normal site-packages is not writeable
+Requirement already satisfied: pip in ./.local/lib/python3.9/site-packages (26.0.1)
+Defaulting to user installation because normal site-packages is not writeable
+Requirement already satisfied: lightgbm in ./.local/lib/python3.9/site-packages (4.6.0)
+Requirement already satisfied: scikit-learn in ./.local/lib/python3.9/site-packages (1.6.1)
+Requirement already satisfied: pandas in ./.local/lib/python3.9/site-packages (2.3.3)
+Requirement already satisfied: numpy in ./.local/lib/python3.9/site-packages (2.0.2)
+Requirement already satisfied: kaggle in ./.local/lib/python3.9/site-packages (1.7.4.5)
+Requirement already satisfied: scipy in ./.local/lib/python3.9/site-packages (from lightgbm) (1.13.1) 
+Requirement already satisfied: joblib>=1.2.0 in ./.local/lib/python3.9/site-packages (from scikit-learn) (1.5.3)
+Requirement already satisfied: threadpoolctl>=3.1.0 in ./.local/lib/python3.9/site-packages (from scikit-learn) (3.6.0)
+Requirement already satisfied: python-dateutil>=2.8.2 in ./.local/lib/python3.9/site-packages (from pandas) (2.9.0.post0)
+Requirement already satisfied: pytz>=2020.1 in /usr/lib/python3.9/site-packages (from pandas) (2022.7.1)
+Requirement already satisfied: tzdata>=2022.7 in ./.local/lib/python3.9/site-packages (from pandas) (2026.2)
+Requirement already satisfied: bleach in ./.local/lib/python3.9/site-packages (from kaggle) (6.2.0)   
+Requirement already satisfied: certifi>=14.05.14 in ./.local/lib/python3.9/site-packages (from kaggle) (2026.6.17)
+Requirement already satisfied: charset-normalizer in ./.local/lib/python3.9/site-packages (from kaggle) (3.4.7)
+Requirement already satisfied: idna in /usr/lib/python3.9/site-packages (from kaggle) (2.10)
+Requirement already satisfied: protobuf in ./.local/lib/python3.9/site-packages (from kaggle) (6.33.6)
+Requirement already satisfied: python-slugify in ./.local/lib/python3.9/site-packages (from kaggle) (8.0.4)
+Requirement already satisfied: requests in /usr/lib/python3.9/site-packages (from kaggle) (2.25.1)    
+Requirement already satisfied: setuptools>=21.0.0 in /usr/lib/python3.9/site-packages (from kaggle) (59.6.0)
+Requirement already satisfied: six>=1.10 in /usr/lib/python3.9/site-packages (from kaggle) (1.15.0)   
+Requirement already satisfied: text-unidecode in ./.local/lib/python3.9/site-packages (from kaggle) (1.3)
+Requirement already satisfied: tqdm in ./.local/lib/python3.9/site-packages (from kaggle) (4.68.3)    
+Requirement already satisfied: urllib3>=1.15.1 in /usr/lib/python3.9/site-packages (from kaggle) (1.25.10)
+Requirement already satisfied: webencodings in ./.local/lib/python3.9/site-packages (from kaggle) (0.5.1)
+Requirement already satisfied: chardet<5,>=3.0.2 in /usr/lib/python3.9/site-packages (from requests->kaggle) (4.0.0)
+[ec2-user@ip-10-0-10-78 ~]$ mkdir -p ~/ml-benchmark
+mv ~/benchmark.py ~/ml-benchmark/
+cd ~/ml-benchmark
+[ec2-user@ip-10-0-10-78 ml-benchmark]$ mkdir -p ~/.kaggle
+cat > ~/.kaggle/kaggle.json << 'EOF'
+{"username":"tqkhanh05","key":"KGAT_7aabea3839b8fc639aeeba28ab16d489"}
+EOF
+chmod 600 ~/.kaggle/kaggle.json
+[ec2-user@ip-10-0-10-78 ml-benchmark]$ kaggle datasets download -d mlg-ulb/creditcardfraud --unzip -p ~/ml-benchmark/
+Dataset URL: https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud
+License(s): DbCL-1.0
+Downloading creditcardfraud.zip to /home/ec2-user/ml-benchmark
+  0%|                                                                    | 0.00/66.0M [00:00<?, ?B/s]
+100%|███████████████████████████████████████████████████████████| 66.0M/66.0M [00:00<00:00, 2.58GB/s] 
+[ec2-user@ip-10-0-10-78 ml-benchmark]$ python3 benchmark.py
+=== STARTING LIGHTGBM BENCHMARK ===
+1. Loading Credit Card Fraud Detection dataset...
+   Loaded 284807 rows in 1.0780 seconds.
+2. Training LightGBM model...
+[10]    valid_0's auc: 0.855567
+[20]    valid_0's auc: 0.831054
+[30]    valid_0's auc: 0.789366
+[40]    valid_0's auc: 0.765275
+[50]    valid_0's auc: 0.741338
+[60]    valid_0's auc: 0.715309
+[70]    valid_0's auc: 0.814707
+[80]    valid_0's auc: 0.840779
+[90]    valid_0's auc: 0.843742
+[100]   valid_0's auc: 0.857665
+   Model training completed in 3.0353 seconds.
+3. Evaluating model...
+   AUC-ROC:   0.806111
+   Accuracy:  0.998455
+   F1-Score:  0.584906
+   Precision: 0.543860
+   Recall:    0.632653
+4. Benchmarking inference latency & throughput...
+   Inference latency (1 row): 0.1996 ms
+   Inference throughput (1000 rows): 429674.26 rows/sec
+
+Results successfully saved to benchmark_result.json!
+[ec2-user@ip-10-0-10-78 ml-benchmark]$ cat benchmark_result.json
+{
+    "load_time_seconds": 1.078,
+    "training_time_seconds": 3.0353,
+    "auc_roc": 0.806111,
+    "accuracy": 0.998455,
+    "f1_score": 0.584906,
+    "precision": 0.54386,
+    "recall": 0.632653,
+    "inference_latency_1_row_ms": 0.1996,
+    "inference_throughput_1000_rows_per_sec": 429674.26
+[ec2-user@ip-10-0-10-78 ml-benchmark]$
